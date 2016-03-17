@@ -75,7 +75,8 @@ class Body {
         if (this.x  < BOUNDS_LEFT) {
             this.vx = -BOUNCE * this.vx;
         }
-
+        // 摩擦
+        
 
 
         //根据物体位置更新显示对象属性
