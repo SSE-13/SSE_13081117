@@ -48,7 +48,7 @@ module game {
 
     }
 
-    export class BoyShape extends DisplayObject {
+   export class BoyShape extends DisplayObject {
         render(context: CanvasRenderingContext2D) {
             context.beginPath()
             context.fillStyle = '#00FFFF';
@@ -66,20 +66,18 @@ module game {
         
         public run(grid) {
             grid.setStartNode(0, 0);
-            //this.x=grid.startNode.x*this.width; 
-            //this.y=grid.startNode.y*this.height;
+            this.x=grid.startNode.x*this.width; 
+            this.y=grid.startNode.y*this.height;
             grid.setEndNode(10, 8);
             var findpath = new astar.AStar();
             findpath.setHeurisitic(findpath.diagonal);
             var result = findpath.findPath(grid);
-            //var path = findpath._path;
+            var path = findpath._path;
             
             this.path = findpath._path;
             console.log(this.path);
             console.log(grid.toString());
-            
-            //this.x = this.WIDTH * grid.StarNode.x;
-            //this.y = this.HEIGHT *  grid.StarNode.y;      
+                 
         }
 
         public onTicker(duringTime) {
@@ -115,4 +113,3 @@ renderCore.start([world, boyShape]);
 
 var ticker = new Ticker();
 ticker.start([body]);
-ticker.onTicker();
