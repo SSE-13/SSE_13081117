@@ -26,6 +26,7 @@ module render {
         constructor() {
             this.globalMatrix = new render.Matrix();
         }
+        
 
         draw(context: CanvasRenderingContext2D) {
 
@@ -42,8 +43,9 @@ module render {
             }
             else {
                 //TODO:
-                // GLOBAL_MATRIX =LOCAL_MATRIX * PARENT_GLOBAL_MATRIX
-                this.globalMatrix = localMatrix;
+                // GLOBAL_MATRIX = LOCAL_MATRIX * PARENT_GLOBAL_MATRIX 
+               var parentGlobelMatrix=this.parent.globalMatrix;
+               this.globalMatrix.transformToGlobel(localMatrix,parentGlobelMatrix);
             }
 
 

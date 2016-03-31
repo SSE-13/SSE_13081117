@@ -1,3 +1,12 @@
+/*const GRAVITY = 9.8;
+
+const BOUNDS_BOTTOM = 400;
+
+const BOUNDS_LEFT = 0;
+
+const BOUNDS_RIGHT = 400;
+
+const BOUNCE = 0.95;*/
 /**
  * 计时器系统
  */
@@ -54,7 +63,22 @@ class Body {
     }
 
     public onTicker(duringTime) {
+        /*this.vy += duringTime * GRAVITY;
+        this.x += duringTime * this.vx;
+        this.y += duringTime * this.vy;
 
+        //反弹
+        if (this.y + this.height > BOUNDS_BOTTOM) {
+            this.vy = -BOUNCE * this.vy;
+        }
+
+        //TODO： 左右越界反弹
+        if (this.x + this.width > BOUNDS_RIGHT) {
+            this.vx = -BOUNCE * this.vx;
+        }    
+        if (this.x  < BOUNDS_LEFT) {
+            this.vx = -BOUNCE * this.vx;
+        }*/
     }
     
     public updateDisplayObject(){
