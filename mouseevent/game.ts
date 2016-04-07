@@ -96,6 +96,7 @@ ticker.start([body]);
 var eventCore = new events.EventCore();
 eventCore.init();
 
+
 var headHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
     //alert (`点击位置为${localPoint.x},${localPoint.y}`);
     //return true;
@@ -107,14 +108,15 @@ var headHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
 }
 
 var ax;
-var ay;
+var ar;
+
 var headOnClick = () => {
     alert("clicked!!");
     //修改 HumanBody 的速度，使其反向移动
     if(headHitTest){
          if(body.vx==0){
             body.vx=ax;
-            body.vr=ay;
+            body.vr=ar;
         }else{
             body.vx*=-1;
             body.vr*=-1;
@@ -122,8 +124,53 @@ var headOnClick = () => {
 }
 }
 
-eventCore.register(head,headHitTest,headOnClick);
+var left_legHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
+     console.log(localPoint.x);
+     console.log(localPoint.y);
+     var left_legClicked=false;
+     if(localPoint.x>0 && localPoint.x<100 && localPoint.y>0 && localPoint.y<120){
+        left_legClicked=true;
+    }
+    return left_legClicked;
+}
 
+var left_legOnClick = () => {
+   if(left_legHitTest){
+        ax=body.vx;
+        ar=body.vr;
+        body.vx=0;
+        body.vr=0;
+        body.rotation=0;
+    }
+}
+
+
+
+
+var right_legHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
+    console.log(localPoint.x);
+    console.log(localPoint.y);
+    var right_legClicked=false;
+     if(localPoint.x>0 && localPoint.x<80 && localPoint.y>0 && localPoint.y<120){
+        right_legClicked=true;
+    }
+    return right_legClicked;
+}
+
+var right_legOnClick = () => {
+    if(right_legHitTest){
+        ax=body.vx;
+        ar=body.vr;
+        body.vx=0;
+        body.vr=0;
+        body.rotation=0;
+    }
+}
+
+
+eventCore.register(head,headHitTest,headOnClick);
+eventCore.register(left_leg,left_legHitTest,left_legOnClick);
+eventCore.register(right_leg,right_legHitTest,right_legOnClick);
 
 
 
