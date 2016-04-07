@@ -97,13 +97,29 @@ var eventCore = new events.EventCore();
 eventCore.init();
 
 var headHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
-    alert (`点击位置为${localPoint.x},${localPoint.y}`);
-    return true;
+    //alert (`点击位置为${localPoint.x},${localPoint.y}`);
+    //return true;
+    var headClicked = false;
+    if(localPoint.x>0 &&localPoint.x<100 && localPoint.y>0 && localPoint.y<100){
+         headClicked=true;
+    }
+    return headClicked;
 }
 
+var ax;
+var ay;
 var headOnClick = () => {
     alert("clicked!!");
     //修改 HumanBody 的速度，使其反向移动
+    if(headHitTest){
+         if(body.vx==0){
+            body.vx=ax;
+            body.vr=ay;
+        }else{
+            body.vx*=-1;
+            body.vr*=-1;
+    }
+}
 }
 
 eventCore.register(head,headHitTest,headOnClick);
