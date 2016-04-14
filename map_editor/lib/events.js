@@ -4,6 +4,10 @@ var events;
         return localPoint.x >= 0 && localPoint.x <= displayObject.width && localPoint.y >= 0 && localPoint.y <= displayObject.height;
     }
     events.displayObjectRectHitTest = displayObjectRectHitTest;
+    function displayObjectTextHitTest(localPoint, displayObject) {
+        return localPoint.x >= 0 && localPoint.x <= displayObject.width && localPoint.y >= 0 && localPoint.y <= displayObject.height;
+    }
+    events.displayObjectTextHitTest = displayObjectTextHitTest;
     class EventCore {
         constructor() {
             this.onStageClick = (e) => {

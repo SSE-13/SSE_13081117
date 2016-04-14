@@ -82,6 +82,10 @@ module render {
             this.children.push(child);
             child.parent = this;
         }
+        changeChild(index:number,child:DisplayObject){
+            this.children[index]=child;
+            child.parent=this;
+        }
 
         render(context) {
             for (var i = 0; i < this.children.length; i++) {
@@ -130,12 +134,18 @@ module render {
         }
     }
 
-    class TextField extends DisplayObject {
-
+    export class TextField extends DisplayObject {
+        content;
+        constructor(content:string){
+            super();
+            this.content=content;
+            this.width=20*content.length;
+            this.height=20;
+        }
         render(context: CanvasRenderingContext2D) {
             context.font = "20px Arial";
             context.fillStyle = '#000000';
-            context.fillText('HelloWorld', 0, 20);
+            context.fillText(this.content, 0, 20);
         }
     }
 

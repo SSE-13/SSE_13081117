@@ -48,6 +48,10 @@ var render;
             this.children.push(child);
             child.parent = this;
         }
+        changeChild(index, child) {
+            this.children[index] = child;
+            child.parent = this;
+        }
         render(context) {
             for (var i = 0; i < this.children.length; i++) {
                 var child = this.children[i];
@@ -88,12 +92,19 @@ var render;
     }
     render.Rect = Rect;
     class TextField extends DisplayObject {
+        constructor(content) {
+            super();
+            this.content = content;
+            this.width = 20 * content.length;
+            this.height = 20;
+        }
         render(context) {
             context.font = "20px Arial";
             context.fillStyle = '#000000';
-            context.fillText('HelloWorld', 0, 20);
+            context.fillText(this.content, 0, 20);
         }
     }
+    render.TextField = TextField;
     var imagePool = {};
     function loadResource(imageList, callback) {
         var count = 0;

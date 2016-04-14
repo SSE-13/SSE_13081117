@@ -23,7 +23,9 @@ module events {
     export function displayObjectRectHitTest(localPoint: math.Point, displayObject: render.DisplayObject) {
         return localPoint.x >= 0 && localPoint.x <= displayObject.width && localPoint.y >= 0 && localPoint.y <= displayObject.height;
     }
-
+    export function displayObjectTextHitTest(localPoint: math.Point, displayObject: render.DisplayObject){
+        return  localPoint.x >= 0 && localPoint.x <= displayObject.width && localPoint.y >= 0 && localPoint.y <= displayObject.height;
+    }
 
     export class EventCore {
 
