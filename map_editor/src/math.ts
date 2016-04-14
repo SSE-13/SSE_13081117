@@ -1,6 +1,66 @@
 
 
-module render {
+module math {
+
+
+    export class Point {
+        x: number;
+        y: number;
+        constructor(x: number, y: number) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    export function pointAppendMatrix(point: Point, m: Matrix): Point {
+        var x = m.a * point.x + m.c * point.y + m.tx;
+        var y = m.b * point.x + m.d * point.y + m.ty;
+        return new Point(x, y);
+
+    }
+
+    /**
+     * 使用伴随矩阵法求逆矩阵
+     * http://wenku.baidu.com/view/b0a9fed8ce2f0066f53322a9
+     */
+    export function invertMatrix(m: Matrix): Matrix {
+
+
+        var a = m.a;
+        var b = m.b;
+        var c = m.c;
+        var d = m.d;
+        var tx = m.tx;
+        var ty = m.ty;
+
+        var determinant = a * d - b * c;
+        var result = new Matrix(1, 0, 0, 1, 0, 0);
+        if (determinant == 0) {
+            throw new Error("no invert");
+        }
+
+        determinant = 1 / determinant;
+        var k = result.a = d * determinant;
+        b = result.b = -b * determinant;
+        c = result.c = -c * determinant;
+        d = result.d = a * determinant;
+        result.tx = -(k * tx + c * ty);
+        result.ty = -(b * tx + d * ty);
+        return result;
+
+    }
+
+    export function matrixAppendMatrix(m1: Matrix, m2: Matrix): Matrix {
+
+        var result = new Matrix();
+        result.a = m1.a * m2.a + m1.b * m2.c;
+        result.b = m1.a * m2.b + m1.b * m2.d;
+        result.c = m2.a * m1.c + m2.c * m1.d;
+        result.d = m2.b * m1.c + m1.d * m2.d;
+        result.tx = m2.a * m1.tx + m2.c * m1.ty + m2.tx;
+        result.ty = m2.b * m1.tx + m2.d * m1.ty + m2.ty;
+        return result;
+    }
 
     var PI = Math.PI;
     var HalfPI = PI / 2;
@@ -76,7 +136,7 @@ module render {
      * @includeExample egret/geom/Matrix.ts
      */
     export class Matrix {
-  
+
         /**
          * @language en_US
          * Creates a new Matrix object with the specified parameters.
@@ -213,8 +273,6 @@ module render {
         public toString(): string {
             return "(a=" + this.a + ", b=" + this.b + ", c=" + this.c + ", d=" + this.d + ", tx=" + this.tx + ", ty=" + this.ty + ")";
         }
-        
-       
 
         /**
          * 根据显示对象的属性确定当前矩阵
@@ -224,7 +282,7 @@ module render {
             this.tx = x;
             this.ty = y;
 
-            var skewX, skewY; 
+            var skewX, skewY;
             skewX = skewY = rotation / 180 * Math.PI;;
 
             if ((skewX == 0 || skewX == TwoPI) && (skewY == 0 || skewY == TwoPI)) {
@@ -246,16 +304,6 @@ module render {
             this.c = -v * scaleY;
             this.d = u * scaleY;
 
-        }
-        public transformToGlobel(localMatrix,parentGlobelMatrix){//行列式乘法
-            
-           this.a=localMatrix.a *parentGlobelMatrix.a+localMatrix.b *parentGlobelMatrix.c;
-           this.b=localMatrix.a *parentGlobelMatrix.b+localMatrix.b *parentGlobelMatrix.d;
-           this.c=localMatrix.c *parentGlobelMatrix.a+localMatrix.d *parentGlobelMatrix.c;
-           this.d=localMatrix.c *parentGlobelMatrix.b+localMatrix.d *parentGlobelMatrix.d;
-           this.tx=localMatrix.tx *parentGlobelMatrix.a+localMatrix.ty *parentGlobelMatrix.c+1*parentGlobelMatrix.tx;
-           this.ty=localMatrix.tx *parentGlobelMatrix.b+localMatrix.ty *parentGlobelMatrix.d+1*parentGlobelMatrix.ty;
-              
         }
     }
 }
