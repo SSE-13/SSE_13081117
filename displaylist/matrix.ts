@@ -249,6 +249,7 @@ module render {
         }
         public transformToGlobel(localMatrix,parentGlobelMatrix){//行列式乘法
             
+            
            this.a=localMatrix.a *parentGlobelMatrix.a+localMatrix.b *parentGlobelMatrix.c;
            this.b=localMatrix.a *parentGlobelMatrix.b+localMatrix.b *parentGlobelMatrix.d;
            this.c=localMatrix.c *parentGlobelMatrix.a+localMatrix.d *parentGlobelMatrix.c;
