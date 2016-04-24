@@ -1,6 +1,3 @@
-/**
- * 计时器系统
- */
 var Ticker = (function () {
     function Ticker() {
         this.bodyQueue = [];
@@ -13,7 +10,7 @@ var Ticker = (function () {
         this.bodyQueue = bodyQueue;
         this.lastTime = Date.now();
         var self = this;
-        setInterval(this.onTicker.bind(this), 1000 / 60);
+        setInterval(this.onTicker.bind(this), 1000 / 600);
     };
     Ticker.prototype.onTicker = function () {
         var currentTime = Date.now();

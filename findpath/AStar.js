@@ -94,11 +94,6 @@ var astar;
                 result += "\n";
             }
             return result;
-            // return this._nodes.map(
-            //     (arr) => arr.map(
-            //         (node) => node.toString()
-            //     ).join("")
-            // ).join("\n")
         };
         return Grid;
     }());

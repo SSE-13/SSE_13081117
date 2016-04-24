@@ -1,10 +1,6 @@
-/**
- * 计时器系统
- */
 class Ticker {
 
     bodyQueue = [];
-
     lastTime;
 
     /**
@@ -15,17 +11,18 @@ class Ticker {
         this.bodyQueue = bodyQueue;
         this.lastTime = Date.now();
         var self = this;
-        setInterval(this.onTicker.bind(this), 1000 / 60);
+        setInterval(this.onTicker.bind(this), 1000 / 600);
     }
 
     onTicker() {
         var currentTime = Date.now();
         var duringTime = currentTime - this.lastTime;
         this.lastTime = currentTime;
-        this.bodyQueue.map(function(body) {
+        this.bodyQueue.map(function(body : Body) {
             body.onTicker(duringTime / 100);
             body.updateDisplayObject();
         });
+
     }
 }
 
@@ -43,9 +40,11 @@ class Body {
 
     constructor(displayObject: DisplayObject) {
         this.displayObject = displayObject;
+        
     }
 
     public onTicker(duringTime) {
+    
 
     }
     
